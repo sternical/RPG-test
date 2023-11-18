@@ -1,0 +1,53 @@
+Maping:
+can make a variable to check if its active and put it in NEW to constantly check if the variable has been 
+changed to false and while its true it shows the map but when alse it hides the map.
+
+GUI:
+add a GUI
+- hotbar of items
+- indicators that show keybinds like inventory
+- healhbar
+- stamina bar
+
+inventory:
+make and inventory keybind and when the keybind is clicked it opens invetory
+make the inventory interactable to drag and move items
+
+items:
+give every item a value from 0000 to 9999 as will most likely not need more but will leave room for future updates
+assine damage values and damage scaling and create a damage scaling calculation linked to weapon stats
+
+food:
+add food that heals your hp at set value depending on how it is cooked and how well it is done
+add food that regens your stamina at a set value depending on how it is cooked and how well it is done
+add food that regens stamina over time faster at set value depending on how it is cooked and how well it is done
+add food that regens hp over time at set value depending on how it is cooked and how well it is done
+
+Bosses:
+add boss domains that when enetered the boss can tp around and unleash attacks
+add encounter bosses within the world
+add sea bosses that have a rare chance to spawn while in dangerouse sea areas
+
+File saving:
+as saving will most likely be linked to files, encription will be needed to encript and decript save files to reduce the
+chance of being tampered with
+figure out wether i want backpacks to increase inventry or increase with strength stat and find the max possible ammount of
+storage from the system and from this using item values store everything in a line down untill the max inventry space
+everything stored like e.g.
+- 00 - level
+- 1563 - level exp
+- 50 - max hp
+- 34 - current hp
+- 0023 - item ID
+- 0342 - item ID
+- 0324 - item ID
+- 0326 - item ID
+-  - item ID
+-  - item ID
+-  - item ID
+-  - item ID
+- 0435 - talent ID
+- 0056 - talent ID
+this is not what it will look like most likely
+ECT
+this idea is not garenteed and is subject to change 
