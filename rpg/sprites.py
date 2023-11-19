@@ -32,9 +32,6 @@ class Player(pygame.sprite.Sprite):
         self.facing = 'down'
 
         self.image = self.game.character_spritesheet.get_sprite(3,2,self.width,self.height)
-
-
-        
         
         self.rect = self.image.get_rect()
         self.rect.x = self.x
@@ -44,14 +41,17 @@ class Player(pygame.sprite.Sprite):
         self.movement()
         
         self.rect.x += self.x_change
+        self.collide_blocks('x')
         self.rect.y += self.y_change
+        self.collide_blocks('y')
         
         self.x_change=0
         self.y_change=0
-    
+
     def movement(self):
         keys =  pygame.key.get_pressed()
         global PLAYER_SPEED
+        global stamina
         #if keys[pygame.K_LEFT]:
         #    self.x_change-=PLAYER_SPEED
         #    self.facing = 'left'
@@ -65,43 +65,75 @@ class Player(pygame.sprite.Sprite):
         #if keys[pygame.K_DOWN]:
         #    self.y_change+=PLAYER_SPEED
         #    self.facing = 'down'
+
+        #stamina regen
+        if stamina<totalstamina:
+            if keys[pygame.K_LSHIFT] != True:
+                stamina=stamina+staminaregen
             
+
+
         if keys[pygame.K_a]:
             if keys[pygame.K_LSHIFT]:
-                PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                self.x_change-=PLAYER_SPEED
-                self.facing = 'left' 
-                PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION               
+                if stamina>0:
+                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+                    self.x_change-=PLAYER_SPEED
+                    self.facing = 'left' 
+                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+                    stamina=stamina-staminadrain
             self.x_change-=PLAYER_SPEED
             self.facing = 'left'
             
         if keys[pygame.K_d]:
             if keys[pygame.K_LSHIFT]:
-                PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                self.x_change+=PLAYER_SPEED
-                self.facing = 'right'
-                PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION   
+                if stamina>0:
+                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+                    self.x_change+=PLAYER_SPEED
+                    self.facing = 'right'
+                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION   
+                    stamina=stamina-staminadrain
             self.x_change+=PLAYER_SPEED
             self.facing = 'right'
             
         if keys[pygame.K_w]:
             if keys[pygame.K_LSHIFT]:
-                PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                self.y_change-=PLAYER_SPEED
-                self.facing = 'up'
-                PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+                if stamina>0:
+                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+                    self.y_change-=PLAYER_SPEED
+                    self.facing = 'up'
+                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+                    stamina=stamina-staminadrain
             self.y_change-=PLAYER_SPEED
             self.facing = 'up'
             
         if keys[pygame.K_s]:
             if keys[pygame.K_LSHIFT]:
-                PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                self.y_change+=PLAYER_SPEED
-                self.facing = 'down'
-                PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+                if stamina>0:
+                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+                    self.y_change+=PLAYER_SPEED
+                    self.facing = 'down'
+                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+                    stamina=stamina-staminadrain
             self.y_change+=PLAYER_SPEED
             self.facing = 'down'
-            
+        
+    def collide_blocks(self,direction):
+        if direction == "x":
+            hits = pygame.sprite.spritecollide(self,self.game.blocks, False)
+            if hits:
+                if self.x_change>0:
+                    self.rect.x = hits[0].rect.left - self.rect.width
+                if self.x_change<0:
+                    self.rect.x = hits[0].rect.right  
+        if direction == "y":
+            hits = pygame.sprite.spritecollide(self,self.game.blocks, False)
+            if hits:
+                if self.y_change>0:
+                    self.rect.y = hits[0].rect.top - self.rect.height
+                if self.y_change<0:
+                    self.rect.y=hits[0].rect.bottom
+
+
 class Block(pygame.sprite.Sprite):
     def __init__(self,game,x,y):
         self.game = game

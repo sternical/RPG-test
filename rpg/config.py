@@ -16,6 +16,14 @@ GROUND_LAYER = 0
 PLAYER_SPEED = 3
 SHIFT_CALCULATION = 1.5
 
+totalstamina=100
+stamina=totalstamina
+staminadrain=0.2
+staminaregen=0.1
+
+
+
+
 tilemap = [
     'WWWWWWWWWWWWWWWWWWWW',
     'W..................W',
