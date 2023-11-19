@@ -14,7 +14,7 @@ BLOCK_LAYER = 1
 GROUND_LAYER = 0
 
 PLAYER_SPEED = 3
-SHIFT_CALCULATION = 1.5
+#SHIFT_CALCULATION = 2
 
 totalstamina=100
 stamina=totalstamina
@@ -25,19 +25,19 @@ staminaregen=0.1
 
 
 tilemap = [
-    'WWWWWWWWWWWWWWWWWWWW',
-    'W..................W',
-    'W..WWW.WW..........W',
-    'W..................W',
-    'W...........W......W',
-    'W...........W......W',
-    'W...........WWWW...W',
-    'W..................W',
-    'W..................W',
-    'W......WWWWW.......W',
-    'W..........W.......W',
-    'W......W..PW.......W',
-    'W......WWWWW.......W',
-    'W..................W',
-    'WWWWWWWWWWWWWWWWWWWW'
+    'WWWWWWWWWWWWWWWWWWWWW',
+    'W...................W',
+    'W..WWW.WW...........W',
+    'W...................W',
+    'W...........W.......W',
+    'W...........W.......W',
+    'W...........WWWW....W',
+    'W.........P.........W',
+    'W...................W',
+    'W......WWWWW........W',
+    'W..........W........W',
+    'W......W...W........W',
+    'W......WWWWW........W',
+    'W...................W',
+    'WWWWWWWWWWWWWWWWWWWWW'
 ]

@@ -74,64 +74,153 @@ class Player(pygame.sprite.Sprite):
 
 
         if keys[pygame.K_a]:
-            if keys[pygame.K_LSHIFT]:
-                if stamina>0:
-                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                    self.x_change-=PLAYER_SPEED
-                    self.facing = 'left' 
-                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
-                    stamina=stamina-staminadrain
+            #if keys[pygame.K_LSHIFT]:
+            #    if stamina>0:
+            #        PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+            #        self.x_change-=PLAYER_SPEED
+            #        self.facing = 'left' 
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.x += PLAYER_SPEED
+            #        PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+            #        stamina=stamina-staminadrain
+            #    if stamina<=0:
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.x += PLAYER_SPEED
+            #        self.x_change-=PLAYER_SPEED
+            #        self.facing = 'left'
+            #else:
+            #    for sprite in self.game.all_sprites:
+            #        sprite.rect.x += PLAYER_SPEED
+            #    self.x_change-=PLAYER_SPEED
+            #    self.facing = 'left'
+            for sprite in self.game.all_sprites:
+                sprite.rect.x += PLAYER_SPEED
             self.x_change-=PLAYER_SPEED
             self.facing = 'left'
             
         if keys[pygame.K_d]:
-            if keys[pygame.K_LSHIFT]:
-                if stamina>0:
-                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                    self.x_change+=PLAYER_SPEED
-                    self.facing = 'right'
-                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION   
-                    stamina=stamina-staminadrain
+            #if keys[pygame.K_LSHIFT]:
+            #    if stamina>0:
+            #        PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+            #        self.x_change+=PLAYER_SPEED
+            #        self.facing = 'right'
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.x -= PLAYER_SPEED
+            #        PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION   
+            #        stamina=stamina-staminadrain
+            #    if stamina<=0:
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.x -= PLAYER_SPEED
+            #        self.x_change+=PLAYER_SPEED
+            #        self.facing = 'right'
+            #else:
+            #    for sprite in self.game.all_sprites:
+            #        sprite.rect.x -= PLAYER_SPEED
+            #    self.x_change+=PLAYER_SPEED
+            #    self.facing = 'right'
+            for sprite in self.game.all_sprites:
+                sprite.rect.x -= PLAYER_SPEED
             self.x_change+=PLAYER_SPEED
             self.facing = 'right'
             
         if keys[pygame.K_w]:
-            if keys[pygame.K_LSHIFT]:
-                if stamina>0:
-                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                    self.y_change-=PLAYER_SPEED
-                    self.facing = 'up'
-                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
-                    stamina=stamina-staminadrain
+            #if keys[pygame.K_LSHIFT]:
+            #    if stamina>0:
+            #        PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+            #        self.y_change-=PLAYER_SPEED
+            #        self.facing = 'up'
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.y += PLAYER_SPEED
+            #        PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+            #        stamina=stamina-staminadrain
+            #    if stamina<=0:
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.y += PLAYER_SPEED
+            #        self.y_change-=PLAYER_SPEED
+            #        self.facing = 'up'
+            #else:
+            #    for sprite in self.game.all_sprites:
+            #        sprite.rect.y += PLAYER_SPEED
+            #    self.y_change-=PLAYER_SPEED
+            #    self.facing = 'up'
+            for sprite in self.game.all_sprites:
+                sprite.rect.y += PLAYER_SPEED
             self.y_change-=PLAYER_SPEED
             self.facing = 'up'
             
         if keys[pygame.K_s]:
-            if keys[pygame.K_LSHIFT]:
-                if stamina>0:
-                    PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
-                    self.y_change+=PLAYER_SPEED
-                    self.facing = 'down'
-                    PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
-                    stamina=stamina-staminadrain
+            #if keys[pygame.K_LSHIFT]:
+            #    if stamina>0:
+            #        PLAYER_SPEED = PLAYER_SPEED * SHIFT_CALCULATION
+            #        self.y_change+=PLAYER_SPEED
+            #        self.facing = 'down'
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.y -= PLAYER_SPEED
+            #        PLAYER_SPEED = PLAYER_SPEED / SHIFT_CALCULATION
+            #        stamina=stamina-staminadrain
+            #    if stamina<=0:
+            #        for sprite in self.game.all_sprites:
+            #            sprite.rect.y -= PLAYER_SPEED
+            #        self.y_change+=PLAYER_SPEED
+            #        self.facing = 'down'
+            #else:
+            #    for sprite in self.game.all_sprites:
+            #        sprite.rect.y -= PLAYER_SPEED
+            #    self.y_change+=PLAYER_SPEED
+            #    self.facing = 'down'
+            for sprite in self.game.all_sprites:
+                sprite.rect.y -= PLAYER_SPEED
             self.y_change+=PLAYER_SPEED
             self.facing = 'down'
         
     def collide_blocks(self,direction):
+        keys =  pygame.key.get_pressed()
         if direction == "x":
             hits = pygame.sprite.spritecollide(self,self.game.blocks, False)
             if hits:
                 if self.x_change>0:
                     self.rect.x = hits[0].rect.left - self.rect.width
+                    for sprite in self.game.all_sprites:
+                            sprite.rect.x+=PLAYER_SPEED
+                    #if keys[pygame.K_LSHIFT] and stamina>0:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.x+=PLAYER_SPEED*SHIFT_CALCULATION  
+                    #else:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.x+=PLAYER_SPEED
                 if self.x_change<0:
-                    self.rect.x = hits[0].rect.right  
+                    self.rect.x = hits[0].rect.right
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.x-=PLAYER_SPEED
+                    #if keys[pygame.K_LSHIFT] and stamina>0:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.x-=PLAYER_SPEED*SHIFT_CALCULATION  
+                    #else:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.x-=PLAYER_SPEED
         if direction == "y":
             hits = pygame.sprite.spritecollide(self,self.game.blocks, False)
             if hits:
                 if self.y_change>0:
                     self.rect.y = hits[0].rect.top - self.rect.height
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.y+=PLAYER_SPEED
+                    #if keys[pygame.K_LSHIFT] and stamina>0:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.y+=PLAYER_SPEED*SHIFT_CALCULATION  
+                    #else:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.y+=PLAYER_SPEED
                 if self.y_change<0:
                     self.rect.y=hits[0].rect.bottom
+                    for sprite in self.game.all_sprites:
+                            sprite.rect.y-=PLAYER_SPEED
+                    #if keys[pygame.K_LSHIFT] and stamina>0:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.y-=PLAYER_SPEED*SHIFT_CALCULATION  
+                    #else:
+                    #    for sprite in self.game.all_sprites:
+                    #        sprite.rect.y-=PLAYER_SPEED
 
 
 class Block(pygame.sprite.Sprite):
